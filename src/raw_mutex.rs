@@ -226,7 +226,7 @@ impl RawMutex {
             }
 
             // If there is no queue, try spinning a few times
-            if state & PARKED_BIT == 0 && spinwait.spin() {
+            if spinwait.spin() {
                 state = self.state.load(Ordering::Relaxed);
                 continue;
             }
